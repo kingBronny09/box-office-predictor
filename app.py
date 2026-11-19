@@ -194,7 +194,7 @@ with tab1:
             else:
                 res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
         else:
-            st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
+            st.caption("Adjust the budget of your desired film, adjust the opening weekend sales, and CinemaScore above, then click **PREDICT**.")
 
 # ==========================================================
 # TAB 2: HOW IT WORKS & MODEL ACCURACY
