@@ -22,11 +22,6 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* Override Streamlit's native red accent variable globally */
-    :root, .stApp, [data-testid="stAppViewContainer"] {
-        --primary-color: #FFFFFF !important;
-    }
-
     /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
     [data-testid="stToolbar"],
     [data-testid="stHeader"],
@@ -65,17 +60,22 @@ st.markdown(
         padding: 12px !important;
     }
 
-    /* Target BaseWeb's inner slider track bar and thumb directly */
-    [data-testid="stSlider"] [data-baseweb="slider"] > div > div {
+    /* Override Streamlit's inline red linear-gradient on the slider track bar */
+    div[data-baseweb="slider"] div[style*="linear-gradient"] {
         background: #FFFFFF !important;
     }
-    [data-testid="stSlider"] [role="slider"] {
+
+    /* Make the slider circle handle pure white */
+    div[data-baseweb="slider"] div[role="slider"] {
         background-color: #FFFFFF !important;
         border-color: #FFFFFF !important;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
     }
-    [data-testid="stSliderThumbValue"],
-    [data-testid="stSliderTickBarMin"],
-    [data-testid="stSliderTickBarMax"] {
+
+    /* Make the active grade (B+) and F / A+ labels pure white */
+    div[data-testid="stSliderThumbValue"],
+    div[data-testid="stSliderTickBarMin"],
+    div[data-testid="stSliderTickBarMax"] {
         color: #FFFFFF !important;
         font-weight: 700 !important;
     }
