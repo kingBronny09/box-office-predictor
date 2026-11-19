@@ -18,7 +18,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider
+# Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider Bar
 st.markdown(
     """
     <style>
@@ -60,22 +60,26 @@ st.markdown(
         padding: 12px !important;
     }
 
-    /* 1. Force the actual horizontal slider bar (track) to pure white */
-    div[data-baseweb="slider"] > div > div {
+    /* Force EVERY layer of the horizontal slider bar itself to solid white */
+    div[data-baseweb="slider"] > div > div,
+    div[data-baseweb="slider"] > div > div > div,
+    div[data-baseweb="slider"] [data-testid="stSliderTrack"] {
         background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        background-image: none !important;
         height: 6px !important;
         border-radius: 4px !important;
     }
 
-    /* 2. Force the draggable circle (thumb) to pure white */
+    /* Force the draggable circle (thumb) to pure white */
     div[data-baseweb="slider"] div[role="slider"] {
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
         border: 2px solid #FFFFFF !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.85) !important;
     }
 
-    /* 3. Force the active grade (B+) and F / A+ endpoint letters to pure white */
+    /* Force the active grade (B+) and F / A+ endpoint letters to pure white */
     div[data-testid="stSliderThumbValue"],
     div[data-testid="stSliderTickBarMin"],
     div[data-testid="stSliderTickBarMax"] {
