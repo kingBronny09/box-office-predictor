@@ -21,15 +21,27 @@ st.set_page_config(
 # Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider
 st.markdown(
     """
-    <style>
-    /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
-    [data-testid="stToolbar"],
-    [data-testid="stHeader"],
-    [data-testid="stDecoration"],
-    #MainMenu,
-    footer {
-        visibility: hidden !important;
-        display: none !important;
+    /* 1. Force the actual horizontal slider bar (track) to pure white */
+    div[data-baseweb="slider"] > div > div {
+        background: #FFFFFF !important;
+        height: 6px !important;
+        border-radius: 4px !important;
+    }
+
+    /* 2. Force the draggable circle (thumb) to pure white */
+    div[data-baseweb="slider"] div[role="slider"] {
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        border: 2px solid #FFFFFF !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+    }
+
+    /* 3. Force the active grade (B+) and F / A+ endpoint letters to pure white */
+    div[data-testid="stSliderThumbValue"],
+    div[data-testid="stSliderTickBarMin"],
+    div[data-testid="stSliderTickBarMax"] {
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
     }
 
     /* Dark background with Emerald-Green streak in Bottom-Left & Royal-Purple in Top-Right */
