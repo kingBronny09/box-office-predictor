@@ -152,6 +152,13 @@ with st.container(border=True):
     else:
         st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
 
+st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
+
+
 # ==========================================================
 # CARD 2: HOW IT WORKS & MODEL ACCURACY (Below the fold)
 # ==========================================================
