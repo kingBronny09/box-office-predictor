@@ -18,7 +18,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Crisp Predict Button
+# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Solid White PREDICT Button
 st.markdown(
     """
     <style>
@@ -53,16 +53,22 @@ st.markdown(
         padding: 0 !important;
     }
 
-    /* Style the Predict button */
+    /* All-White PREDICT button */
     [data-testid="stFormSubmitButton"] button {
-        background: linear-gradient(90deg, #10b981, #a855f7) !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        color: #090612 !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.08em !important;
         border: none !important;
         border-radius: 10px !important;
         padding: 0.6rem 1.2rem !important;
         font-size: 1.05rem !important;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+    [data-testid="stFormSubmitButton"] button p {
+        color: #090612 !important;
+        font-weight: 800 !important;
     }
     [data-testid="stFormSubmitButton"] button:hover {
         opacity: 0.9 !important;
@@ -80,7 +86,7 @@ GRADE_TO_NUM = {
 }
 
 # ==========================================================
-# CARD 1: MAIN PREDICTOR (Form-gated so it waits for "Predict")
+# CARD 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
 # ==========================================================
 with st.container(border=True):
     st.subheader("🎬 BOX OFFICE ROI & REVENUE PREDICTOR")
@@ -113,7 +119,7 @@ with st.container(border=True):
         )
 
         st.write("")
-        submitted = st.form_submit_button("Predict", use_container_width=True)
+        submitted = st.form_submit_button("PREDICT", use_container_width=True)
 
     if submitted:
         st.divider()
@@ -144,7 +150,7 @@ with st.container(border=True):
         else:
             res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
     else:
-        st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **Predict**.")
+        st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
 
 # ==========================================================
 # CARD 2: HOW IT WORKS & MODEL ACCURACY (Below the fold)
