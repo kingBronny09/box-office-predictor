@@ -49,10 +49,10 @@ st.markdown(
 
     /* Top Tabs Styling */
     button[data-baseweb="tab"] {
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
         font-weight: 700 !important;
         color: rgba(255, 255, 255, 0.65) !important;
-        padding: 10px 20px !important;
+        padding: 10px 14px !important;
     }
     button[data-baseweb="tab"][aria-selected="true"] {
         color: #FFFFFF !important;
@@ -103,7 +103,7 @@ GRADE_TO_NUM = {
 # ==========================================================
 # TOP NAVIGATION TABS
 # ==========================================================
-tab1, tab2, tab3, tab4 = st.tabs(["🎬 Predictor", "📊 How It Works & Accuracy", "Accurately Predicted Films", "Top 10 Highest Grossing"])
+tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accurately Predicted Films", "Top 10 Highest Grossing"])
 
 # ==========================================================
 # TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
@@ -215,3 +215,50 @@ with tab2:
             "Ben Affleck famously said that a film normally must make 4× its budget to break even. This can be true in some cases, but we still follow Hollywood's Break-Even Rule. "
             "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
         )
+
+# ==========================================================
+# TAB 3: ACCURATELY PREDICTED FILMS (Placeholder ready for your picks)
+# ==========================================================
+with tab3:
+    with st.container(border=True):
+        st.subheader("🎯 ACCURATELY PREDICTED FILMS")
+        st.divider()
+        st.caption("Coming soon — real-world movies where the model's opening-weekend forecast closely matched actual final box office totals.")
+
+# ==========================================================
+# TAB 4: TOP 10 HIGHEST-GROSSING FILMS OF ALL TIME
+# ==========================================================
+with tab4:
+    with st.container(border=True):
+        st.subheader("🏆 TOP 10 HIGHEST-GROSSING FILMS OF ALL TIME")
+        st.caption("Unadjusted worldwide theatrical box office totals.")
+        st.divider()
+
+        top_10_movies = [
+            {"rank": "#1", "title": "Avatar (2009)", "worldwide": "$2.923B", "budget": "$237M"},
+            {"rank": "#2", "title": "Avengers: Endgame (2019)", "worldwide": "$2.799B", "budget": "$356M"},
+            {"rank": "#3", "title": "Avatar: The Way of Water (2022)", "worldwide": "$2.320B", "budget": "$350M"},
+            {"rank": "#4", "title": "Titanic (1997)", "worldwide": "$2.264B", "budget": "$200M"},
+            {"rank": "#5", "title": "Ne Zha 2 (2025)", "worldwide": "$2.150B", "budget": "$80M"},
+            {"rank": "#6", "title": "Star Wars: The Force Awakens (2015)", "worldwide": "$2.071B", "budget": "$447M"},
+            {"rank": "#7", "title": "Avengers: Infinity War (2018)", "worldwide": "$2.052B", "budget": "$325M"},
+            {"rank": "#8", "title": "Spider-Man: No Way Home (2021)", "worldwide": "$1.922B", "budget": "$200M"},
+            {"rank": "#9", "title": "Inside Out 2 (2024)", "worldwide": "$1.699B", "budget": "$200M"},
+            {"rank": "#10", "title": "Jurassic World (2015)", "worldwide": "$1.671B", "budget": "$150M"},
+        ]
+
+        # Header Row
+        h1, h2, h3, h4 = st.columns([0.6, 2.6, 1.2, 1.0])
+        h1.markdown("**Rank**")
+        h2.markdown("**Film**")
+        h3.markdown("**Worldwide**")
+        h4.markdown("**Budget**")
+        st.divider()
+
+        # Movie Rows
+        for movie in top_10_movies:
+            c1, c2, c3, c4 = st.columns([0.6, 2.6, 1.2, 1.0], vertical_alignment="center")
+            c1.markdown(f"**{movie['rank']}**")
+            c2.markdown(f"**{movie['title']}**")
+            c3.markdown(f":green[**{movie['worldwide']}**]")
+            c4.markdown(f"{movie['budget']}")
