@@ -103,7 +103,7 @@ GRADE_TO_NUM = {
 # ==========================================================
 # TOP NAVIGATION TABS
 # ==========================================================
-tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accurately Predicted Films", "Top 10 Highest Grossing"])
+tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accurately Predicted Films", "Top 10 Hits & Flops"])
 
 # ==========================================================
 # TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
@@ -226,9 +226,10 @@ with tab3:
         st.caption("Coming soon — real-world movies where the model's opening-weekend forecast closely matched actual final box office totals.")
 
 # ==========================================================
-# TAB 4: TOP 10 HIGHEST-GROSSING FILMS OF ALL TIME
+# TAB 4: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
 # ==========================================================
 with tab4:
+    # --- CARD A: TOP 10 HIGHEST-GROSSING FILMS ---
     with st.container(border=True):
         st.subheader("🏆 TOP 10 HIGHEST-GROSSING FILMS OF ALL TIME")
         st.caption("Unadjusted worldwide theatrical box office totals.")
@@ -247,7 +248,6 @@ with tab4:
             {"rank": "#10", "title": "Jurassic World (2015)", "worldwide": "$1.671B", "budget": "$150M"},
         ]
 
-        # Header Row
         h1, h2, h3, h4 = st.columns([0.6, 2.6, 1.2, 1.0])
         h1.markdown("**Rank**")
         h2.markdown("**Film**")
@@ -255,10 +255,46 @@ with tab4:
         h4.markdown("**Budget**")
         st.divider()
 
-        # Movie Rows
         for movie in top_10_movies:
             c1, c2, c3, c4 = st.columns([0.6, 2.6, 1.2, 1.0], vertical_alignment="center")
             c1.markdown(f"**{movie['rank']}**")
             c2.markdown(f"**{movie['title']}**")
             c3.markdown(f":green[**{movie['worldwide']}**]")
             c4.markdown(f"{movie['budget']}")
+
+    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
+
+    # --- CARD B: TOP 10 BIGGEST WORLDWIDE BOX OFFICE FLOPS ---
+    with st.container(border=True):
+        st.subheader("📉 TOP 10 BIGGEST WORLDWIDE BOX OFFICE FLOPS")
+        st.caption("Ranked by estimated unadjusted studio net loss (accounting for production budget, marketing, and theater cuts).")
+        st.divider()
+
+        top_10_flops = [
+            {"rank": "#1", "title": "The Marvels (2023)", "worldwide": "$206.1M", "budget": "$270M", "loss": "-$237M"},
+            {"rank": "#2", "title": "John Carter (2012)", "worldwide": "$284.1M", "budget": "$264M", "loss": "-$200M"},
+            {"rank": "#3", "title": "Strange World (2022)", "worldwide": "$73.6M", "budget": "$180M", "loss": "-$197M"},
+            {"rank": "#4", "title": "The Lone Ranger (2013)", "worldwide": "$260.5M", "budget": "$225M", "loss": "-$190M"},
+            {"rank": "#5", "title": "Mortal Engines (2018)", "worldwide": "$83.7M", "budget": "$110M", "loss": "-$175M"},
+            {"rank": "#6", "title": "The Flash (2023)", "worldwide": "$271.3M", "budget": "$200M", "loss": "-$155M"},
+            {"rank": "#7", "title": "King Arthur: Legend of the Sword (2017)", "worldwide": "$148.7M", "budget": "$175M", "loss": "-$153M"},
+            {"rank": "#8", "title": "Jungle Cruise (2021)", "worldwide": "$220.9M", "budget": "$200M", "loss": "-$150M"},
+            {"rank": "#9", "title": "Joker: Folie à Deux (2024)", "worldwide": "$206.4M", "budget": "$190M", "loss": "-$144M"},
+            {"rank": "#10", "title": "Mars Needs Moms (2011)", "worldwide": "$39.0M", "budget": "$150M", "loss": "-$144M"},
+        ]
+
+        fh1, fh2, fh3, fh4, fh5 = st.columns([0.55, 2.35, 1.0, 0.9, 1.0])
+        fh1.markdown("**Rank**")
+        fh2.markdown("**Film**")
+        fh3.markdown("**Worldwide**")
+        fh4.markdown("**Budget**")
+        fh5.markdown("**Est. Loss**")
+        st.divider()
+
+        for flop in top_10_flops:
+            fc1, fc2, fc3, fc4, fc5 = st.columns([0.55, 2.35, 1.0, 0.9, 1.0], vertical_alignment="center")
+            fc1.markdown(f"**{flop['rank']}**")
+            fc2.markdown(f"**{flop['title']}**")
+            fc3.markdown(f"{flop['worldwide']}")
+            fc4.markdown(f"{flop['budget']}")
+            fc5.markdown(f":red[**{flop['loss']}**]")
