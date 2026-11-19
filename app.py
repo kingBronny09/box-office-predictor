@@ -156,7 +156,6 @@ st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
 st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
 st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
 st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
-st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
 
 
 # ==========================================================
@@ -168,13 +167,13 @@ with st.container(border=True):
 
     st.markdown("**1. The Model & Training Data**")
     st.markdown(
-        "This predictor uses **multivariable linear regression** trained on **30 modern wide-release movies** "
-        "(spanning $12M horror hits to $350M blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
+        "This predictor uses **multivariable linear regression** trained on **a large amount modern wide-release movies** "
+        "(spanning from $10M horror hits to $2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
     )
     st.markdown(
-        "- **Domestic Opening Weekend ($M):** The strongest predictor of total theatrical momentum.\n"
+        "- **Domestic Opening Weekend ($M):** This is easily the strongest predictor of total theatrical momentum.\n"
         "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
-        "- **Opening-Night CinemaScore (`F` to `A+`):** Mapped to a `0–12` scale to measure word-of-mouth legs—each single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
+        "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
     )
 
     st.divider()
@@ -187,6 +186,9 @@ with st.container(border=True):
     st.caption(
         "An R² of 86.5% means these three inputs explain over four-fifths of the variation in final domestic box office totals. "
         "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
+    )
+    st.markdown(
+        "- **Essentially what this means is that our Domestic Box Office Predictor is  ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.** "
     )
 
     st.divider()
