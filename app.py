@@ -79,7 +79,7 @@ with st.container(border=True):
     selected_grade = col3_in.select_slider(
         "Audience Score",
         options=list(GRADE_TO_NUM.keys()),
-        value="B+",
+        value="C+",
         label_visibility="collapsed"
     )
 
