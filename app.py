@@ -18,7 +18,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS: Hide top-right toolbar + Style slider in Dark Royal Magenta (#8B006B)
+# Custom CSS: Green & Purple Streaks Background + Frosted Card + Royal Magenta Slider
 st.markdown(
     """
     <style>
@@ -32,20 +32,47 @@ st.markdown(
         display: none !important;
     }
 
-    /* Slider draggable circle */
+    /* Full-screen dark background with diagonal emerald-green & royal-purple streaks */
+    [data-testid="stAppViewContainer"] {
+        background-color: #090612 !important;
+        background-image:
+            radial-gradient(ellipse at 12% 18%, rgba(16, 185, 129, 0.38) 0%, transparent 48%),
+            radial-gradient(ellipse at 88% 22%, rgba(168, 85, 247, 0.42) 0%, transparent 50%),
+            linear-gradient(125deg,
+                rgba(16, 185, 129, 0.22) 0%,
+                rgba(9, 6, 18, 0.92) 32%,
+                rgba(139, 0, 107, 0.32) 55%,
+                rgba(9, 6, 18, 0.92) 74%,
+                rgba(16, 185, 129, 0.28) 100%
+            ) !important;
+        background-attachment: fixed !important;
+    }
+
+    /* Frosted-glass dark card with a subtle purple-green glow border */
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        background: rgba(14, 11, 24, 0.82) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        border: 1px solid rgba(176, 0, 134, 0.45) !important;
+        border-radius: 16px !important;
+        box-shadow:
+            -12px 0 35px rgba(16, 185, 129, 0.18),
+            12px 0 35px rgba(168, 85, 247, 0.22) !important;
+        padding: 12px !important;
+    }
+
+    /* Royal Magenta (#B00086) Slider Thumb & Active Track */
     div[data-baseweb="slider"] div[role="slider"] {
-        background-color: #8B006B !important;
-        border-color: #8B006B !important;
+        background-color: #B00086 !important;
+        border-color: #B00086 !important;
     }
 
-    /* Slider filled track to the left of the circle */
     div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-        background-color: #8B006B !important;
+        background-color: #B00086 !important;
     }
 
-    /* Slider active grade text (e.g., B+) */
     div[data-testid="stSliderThumbValue"] {
-        color: #8B006B !important;
+        color: #E040FB !important;
         font-weight: 700 !important;
     }
     </style>
