@@ -18,7 +18,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Solid White PREDICT Button
+# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Crisp White Tabs & Button
 st.markdown(
     """
     <style>
@@ -45,6 +45,21 @@ st.markdown(
         border-radius: 16px;
         padding: 12px;
         margin-bottom: 16px;
+    }
+
+    /* Top Tabs Styling */
+    button[data-baseweb="tab"] {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        padding: 10px 20px !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: #FFFFFF !important;
+    }
+    div[data-baseweb="tab-highlight"] {
+        background-color: #FFFFFF !important;
+        height: 3px !important;
     }
 
     /* Remove extra inner border around st.form so it blends seamlessly into the card */
@@ -86,117 +101,117 @@ GRADE_TO_NUM = {
 }
 
 # ==========================================================
-# CARD 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
+# TOP NAVIGATION TABS
 # ==========================================================
-with st.container(border=True):
-    st.subheader("🎬 BOX OFFICE ROI & REVENUE PREDICTOR")
-    st.divider()
+tab1, tab2 = st.tabs(["🎬 Predictor", "📊 How It Works & Accuracy"])
 
-    with st.form("predictor_form"):
-        col1_lbl, col1_in = st.columns([1.4, 1], vertical_alignment="center")
-        col1_lbl.markdown("**Production Budget ($M):**")
-        budget = col1_in.number_input(
-            "Production Budget ($M)",
-            min_value=1.0, max_value=500.0, value=120.0, step=5.0,
-            label_visibility="collapsed"
-        )
-
-        col2_lbl, col2_in = st.columns([1.4, 1], vertical_alignment="center")
-        col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
-        opening = col2_in.number_input(
-            "Opening Weekend Gross ($M)",
-            min_value=0.1, max_value=400.0, value=55.0, step=1.0,
-            label_visibility="collapsed"
-        )
-
-        col3_lbl, col3_in = st.columns([1.4, 1], vertical_alignment="center")
-        col3_lbl.markdown("**Audience Score (CinemaScore):**")
-        selected_grade = col3_in.select_slider(
-            "Audience Score",
-            options=list(GRADE_TO_NUM.keys()),
-            value="B+",
-            label_visibility="collapsed"
-        )
-
-        st.write("")
-        submitted = st.form_submit_button("PREDICT", use_container_width=True)
-
-    if submitted:
+# ==========================================================
+# TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
+# ==========================================================
+with tab1:
+    with st.container(border=True):
+        st.subheader("🎬 BOX OFFICE ROI & REVENUE PREDICTOR")
         st.divider()
 
-        score_num = GRADE_TO_NUM[selected_grade]
+        with st.form("predictor_form"):
+            col1_lbl, col1_in = st.columns([1.4, 1], vertical_alignment="center")
+            col1_lbl.markdown("**Production Budget ($M):**")
+            budget = col1_in.number_input(
+                "Production Budget ($M)",
+                min_value=1.0, max_value=500.0, value=120.0, step=5.0,
+                label_visibility="collapsed"
+            )
 
-        pred_dom = (M1_DOM * opening) + (M2_DOM * budget) + (M3_DOM * score_num) + B_DOM
-        pred_dom = max(opening, pred_dom)
+            col2_lbl, col2_in = st.columns([1.4, 1], vertical_alignment="center")
+            col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
+            opening = col2_in.number_input(
+                "Opening Weekend Gross ($M)",
+                min_value=0.1, max_value=400.0, value=55.0, step=1.0,
+                label_visibility="collapsed"
+            )
 
-        pred_ww = (M1_WW * opening) + (M2_WW * budget) + (M3_WW * score_num) + B_WW
-        pred_ww = max(pred_dom, pred_ww)
+            col3_lbl, col3_in = st.columns([1.4, 1], vertical_alignment="center")
+            col3_lbl.markdown("**Audience Score (CinemaScore):**")
+            selected_grade = col3_in.select_slider(
+                "Audience Score",
+                options=list(GRADE_TO_NUM.keys()),
+                value="B+",
+                label_visibility="collapsed"
+            )
 
-        break_even_target = budget * 2.5
-        roi_pct = ((pred_ww - break_even_target) / break_even_target) * 100
+            st.write("")
+            submitted = st.form_submit_button("PREDICT", use_container_width=True)
 
-        res1_lbl, res1_val = st.columns([1.4, 1], vertical_alignment="center")
-        res1_lbl.markdown("**PREDICTED TOTAL DOMESTIC GROSS:**")
-        res1_val.markdown(f"### ${pred_dom:,.1f} Million")
+        if submitted:
+            st.divider()
 
-        res2_lbl, res2_val = st.columns([1.4, 1], vertical_alignment="center")
-        res2_lbl.markdown("**PREDICTED WORLDWIDE GROSS:**")
-        res2_val.markdown(f"### ${pred_ww:,.1f} Million")
+            score_num = GRADE_TO_NUM[selected_grade]
 
-        res3_lbl, res3_val = st.columns([1.4, 1], vertical_alignment="center")
-        res3_lbl.markdown("**ESTIMATED STUDIO ROI:**")
-        if roi_pct >= 0:
-            res3_val.markdown(f"### :green[+{roi_pct:,.1f}% (Profitable)]")
+            pred_dom = (M1_DOM * opening) + (M2_DOM * budget) + (M3_DOM * score_num) + B_DOM
+            pred_dom = max(opening, pred_dom)
+
+            pred_ww = (M1_WW * opening) + (M2_WW * budget) + (M3_WW * score_num) + B_WW
+            pred_ww = max(pred_dom, pred_ww)
+
+            break_even_target = budget * 2.5
+            roi_pct = ((pred_ww - break_even_target) / break_even_target) * 100
+
+            res1_lbl, res1_val = st.columns([1.4, 1], vertical_alignment="center")
+            res1_lbl.markdown("**PREDICTED TOTAL DOMESTIC GROSS:**")
+            res1_val.markdown(f"### ${pred_dom:,.1f} Million")
+
+            res2_lbl, res2_val = st.columns([1.4, 1], vertical_alignment="center")
+            res2_lbl.markdown("**PREDICTED WORLDWIDE GROSS:**")
+            res2_val.markdown(f"### ${pred_ww:,.1f} Million")
+
+            res3_lbl, res3_val = st.columns([1.4, 1], vertical_alignment="center")
+            res3_lbl.markdown("**ESTIMATED STUDIO ROI:**")
+            if roi_pct >= 0:
+                res3_val.markdown(f"### :green[+{roi_pct:,.1f}% (Profitable)]")
+            else:
+                res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
         else:
-            res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
-    else:
-        st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
-
-st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
-st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
-st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
-st.markdown("<div style='height: 48px;'></div>", unsafe_allow_html=True)
-
+            st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
 
 # ==========================================================
-# CARD 2: HOW IT WORKS & MODEL ACCURACY (Below the fold)
+# TAB 2: HOW IT WORKS & MODEL ACCURACY
 # ==========================================================
-with st.container(border=True):
-    st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
-    st.divider()
+with tab2:
+    with st.container(border=True):
+        st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
+        st.divider()
 
-    st.markdown("**1. The Model & Training Data**")
-    st.markdown(
-        "This predictor uses **multivariable linear regression** trained on **a large amount modern wide-release movies** "
-        "(spanning from $10M horror hits to $2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
-    )
-    st.markdown(
-        "- **Domestic Opening Weekend ($M):** This is easily the strongest predictor of total theatrical momentum.\n"
-        "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
-        "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
-    )
+        st.markdown("**1. The Model & Training Data**")
+        st.markdown(
+            "This predictor uses **multivariable linear regression** trained on **a large amount modern wide-release movies** "
+            "(spanning from $10M horror hits to $2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
+        )
+        st.markdown(
+            "- **Domestic Opening Weekend ($M):** This is easily the strongest predictor of total theatrical momentum.\n"
+            "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
+            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
+        )
 
-    st.divider()
+        st.divider()
 
-    st.markdown("**2. Model Accuracy ($R^2$ Fit)**")
-    acc1, acc2 = st.columns(2)
-    acc1.metric(label="Domestic Box Office Accuracy (R²)", value="86.5%")
-    acc2.metric(label="Worldwide Box Office Accuracy (R²)", value="79.6%")
+        st.markdown("**2. Model Accuracy ($R^2$ Fit)**")
+        acc1, acc2 = st.columns(2)
+        acc1.metric(label="Domestic Box Office Accuracy (R²)", value="86.5%")
+        acc2.metric(label="Worldwide Box Office Accuracy (R²)", value="79.6%")
 
-    st.caption(
-        "An R² of 86.5% means these three inputs explain over four-fifths of the variation in final domestic box office totals. "
-        "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
-    )
-    st.markdown(
-        "**Essentially what this means is that our Domestic Box Office Predictor is  ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.** "
-    )
+        st.caption(
+            "An R² of 86.5% means these three inputs explain over four-fifths of the variation in final domestic box office totals. "
+            "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
+        )
+        st.markdown(
+            "**Essentially what this means is that our Domestic Box Office Predictor is ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.**"
+        )
 
-    st.divider()
+        st.divider()
 
-    st.markdown("**3. How Studio ROI is Calculated**")
-    st.markdown(
-        "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing on top of production costs. "
-        "Ben Affleck famously said that a film normally must make 4× its budget to break even. This can be true in some cases, but we still follow Hollywood's Break-Even Rule. "
-        "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
-    
-    )
+        st.markdown("**3. How Studio ROI is Calculated**")
+        st.markdown(
+            "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing on top of production costs. "
+            "Ben Affleck famously said that a film normally must make 4× its budget to break even. This can be true in some cases, but we still follow Hollywood's Break-Even Rule. "
+            "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
+        )
