@@ -141,7 +141,7 @@ with tab1:
             col1_lbl.markdown("**Production Budget ($M):**")
             budget = col1_in.number_input(
                 "Production Budget ($M)",
-                min_value=1.0, max_value=500.0, value=120.0, step=5.0,
+                min_value=1.0, max_value=700.0, value=100.0, step=5.0,
                 label_visibility="collapsed"
             )
 
@@ -149,7 +149,7 @@ with tab1:
             col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
             opening = col2_in.number_input(
                 "Opening Weekend Gross ($M)",
-                min_value=0.1, max_value=400.0, value=55.0, step=1.0,
+                min_value=1, max_value=450.0, value=50.0, step=1.0,
                 label_visibility="collapsed"
             )
 
@@ -158,7 +158,7 @@ with tab1:
             selected_grade = col3_in.select_slider(
                 "Audience Score",
                 options=list(GRADE_TO_NUM.keys()),
-                value="B+",
+                value="C+",
                 label_visibility="collapsed"
             )
 
