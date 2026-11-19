@@ -133,7 +133,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accur
 # ==========================================================
 with tab1:
     with st.container(border=True):
-        st.subheader("🎬 BOXOFFICEIQ")
+        st.subheader("🎬 Box Office Predictor and ROI Prediction")
         st.divider()
 
         with st.form("predictor_form"):
