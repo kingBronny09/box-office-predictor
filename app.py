@@ -262,7 +262,8 @@ with tab4:
             c3.markdown(f":green[**{movie['worldwide']}**]")
             c4.markdown(f"{movie['budget']}")
 
-    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
+    st.markdown("When talking about the Top 10 Highest Grossing, it's hard not to mention the stinkers. Here are the...")
 
     # --- CARD B: TOP 10 BIGGEST WORLDWIDE BOX OFFICE FLOPS ---
     with st.container(border=True):
