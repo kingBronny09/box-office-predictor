@@ -21,27 +21,15 @@ st.set_page_config(
 # Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider
 st.markdown(
     """
-    /* 1. Force the actual horizontal slider bar (track) to pure white */
-    div[data-baseweb="slider"] > div > div {
-        background: #FFFFFF !important;
-        height: 6px !important;
-        border-radius: 4px !important;
-    }
-
-    /* 2. Force the draggable circle (thumb) to pure white */
-    div[data-baseweb="slider"] div[role="slider"] {
-        background: #FFFFFF !important;
-        background-color: #FFFFFF !important;
-        border: 2px solid #FFFFFF !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
-    }
-
-    /* 3. Force the active grade (B+) and F / A+ endpoint letters to pure white */
-    div[data-testid="stSliderThumbValue"],
-    div[data-testid="stSliderTickBarMin"],
-    div[data-testid="stSliderTickBarMax"] {
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
+    <style>
+    /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
+    [data-testid="stToolbar"],
+    [data-testid="stHeader"],
+    [data-testid="stDecoration"],
+    #MainMenu,
+    footer {
+        visibility: hidden !important;
+        display: none !important;
     }
 
     /* Dark background with Emerald-Green streak in Bottom-Left & Royal-Purple in Top-Right */
@@ -72,23 +60,25 @@ st.markdown(
         padding: 12px !important;
     }
 
-    /* Pure White Slider Handle (draggable circle) */
+    /* 1. Force the actual horizontal slider bar (track) to pure white */
+    div[data-baseweb="slider"] > div > div {
+        background: #FFFFFF !important;
+        height: 6px !important;
+        border-radius: 4px !important;
+    }
+
+    /* 2. Force the draggable circle (thumb) to pure white */
     div[data-baseweb="slider"] div[role="slider"] {
+        background: #FFFFFF !important;
         background-color: #FFFFFF !important;
-        border-color: #FFFFFF !important;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.55) !important;
+        border: 2px solid #FFFFFF !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
     }
 
-    /* Pure White Slider Active Track (filled portion) */
-    div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-        background-color: #FFFFFF !important;
-    }
-
-    /* Pure White Selected Grade above thumb & F / A+ endpoint tick labels */
+    /* 3. Force the active grade (B+) and F / A+ endpoint letters to pure white */
     div[data-testid="stSliderThumbValue"],
     div[data-testid="stSliderTickBarMin"],
-    div[data-testid="stSliderTickBarMax"],
-    div[data-baseweb="slider"] * {
+    div[data-testid="stSliderTickBarMax"] {
         color: #FFFFFF !important;
         font-weight: 700 !important;
     }
