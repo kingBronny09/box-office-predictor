@@ -149,7 +149,7 @@ with tab1:
             col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
             opening = col2_in.number_input(
                 "Opening Weekend Gross ($M)",
-                min_value=1, max_value=450.0, value=50.0, step=1.0,
+                min_value=1.0, max_value=450.0, value=50.0, step=1.0,
                 label_visibility="collapsed"
             )
 
