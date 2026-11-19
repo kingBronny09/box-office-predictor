@@ -33,14 +33,18 @@ st.markdown(
         background-image:
             radial-gradient(circle at 10% 90%, rgba(16, 185, 129, 0.45), transparent 45%),
             radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.45), transparent 45%);
+        background-attachment: fixed;
     }
 
-    /* Frosted dark box */
+    /* Frosted dark cards */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: rgba(14, 11, 24, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 16px;
         padding: 12px;
+        margin-bottom: 16px;
     }
     </style>
     """,
@@ -54,6 +58,9 @@ GRADE_TO_NUM = {
     "A-": 10, "A": 11, "A+": 12
 }
 
+# ==========================================================
+# CARD 1: MAIN PREDICTOR
+# ==========================================================
 with st.container(border=True):
     st.subheader("🎬 BOX OFFICE ROI & REVENUE PREDICTOR")
     st.divider()
@@ -79,7 +86,7 @@ with st.container(border=True):
     selected_grade = col3_in.select_slider(
         "Audience Score",
         options=list(GRADE_TO_NUM.keys()),
-        value="C+",
+        value="B+",
         label_visibility="collapsed"
     )
 
@@ -110,3 +117,41 @@ with st.container(border=True):
         res3_val.markdown(f"### :green[+{roi_pct:,.1f}% (Profitable)]")
     else:
         res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
+
+# ==========================================================
+# CARD 2: HOW IT WORKS & MODEL ACCURACY (Below the fold)
+# ==========================================================
+with st.container(border=True):
+    st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
+    st.divider()
+
+    st.markdown("**1. The Model & Training Data**")
+    st.markdown(
+        "This predictor uses **multivariable linear regression** trained on **30 modern wide-release movies** "
+        "(spanning $12M horror hits to $350M blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
+    )
+    st.markdown(
+        "- **Domestic Opening Weekend ($M):** The strongest predictor of total theatrical momentum.\n"
+        "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
+        "- **Opening-Night CinemaScore (`F` to `A+`):** Mapped to a `0–12` scale to measure word-of-mouth legs—each single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
+    )
+
+    st.divider()
+
+    st.markdown("**2. Model Accuracy ($R^2$ Fit)**")
+    acc1, acc2 = st.columns(2)
+    acc1.metric(label="Domestic Box Office Accuracy (R²)", value="86.5%")
+    acc2.metric(label="Worldwide Box Office Accuracy (R²)", value="79.6%")
+
+    st.caption(
+        "An R² of 86.5% means these three inputs explain over four-fifths of the variation in final domestic box office totals. "
+        "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
+    )
+
+    st.divider()
+
+    st.markdown("**3. How Studio ROI is Calculated**")
+    st.markdown(
+        "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing (P&A) on top of production costs. "
+        "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
+    )
