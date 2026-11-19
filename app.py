@@ -38,7 +38,7 @@ with st.container(border=True):
     )
 
     col2_lbl, col2_in = st.columns([1.4, 1], vertical_alignment="center")
-    col2_lbl.markdown("** Domestic Opening Weekend Gross ($M):**")
+    col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
     opening = col2_in.number_input(
         "Opening Weekend Gross ($M)",
         min_value=0.1, max_value=400.0, value=55.0, step=1.0,
