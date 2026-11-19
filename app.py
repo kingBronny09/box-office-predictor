@@ -195,6 +195,8 @@ with st.container(border=True):
 
     st.markdown("**3. How Studio ROI is Calculated**")
     st.markdown(
-        "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing (P&A) on top of production costs. "
+        "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing on top of production costs. "
+        "Ben Affleck famously said that a film normally must make 4× its budget to break even. This can be true in some cases, but we still follow Hollywood's Break-Even Rule. "
         "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
+    
     )
