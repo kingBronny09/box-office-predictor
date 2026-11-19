@@ -18,13 +18,34 @@ st.set_page_config(
     layout="centered"
 )
 
-# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Crisp White Tabs & Button
+# Clean CSS: Green bottom-left & Purple top-right background + Hide toolbar + Crisp White Tabs & Button + Top-Left Brand
 st.markdown(
     """
     <style>
     /* Hide top-right toolbar & footer */
     [data-testid="stToolbar"], [data-testid="stHeader"], #MainMenu, footer {
         display: none !important;
+    }
+
+    /* Top-Left Fixed Brand Title */
+    .top-left-brand {
+        position: fixed;
+        top: 18px;
+        left: 24px;
+        z-index: 99999;
+        font-size: 1.25rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        color: #FFFFFF;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        user-select: none;
+    }
+
+    /* Push main content down slightly on smaller screens so it never overlaps the top-left brand */
+    @media (max-width: 900px) {
+        .block-container {
+            padding-top: 3.5rem !important;
+        }
     }
 
     /* Green bottom-left & Purple top-right background streaks */
@@ -89,6 +110,8 @@ st.markdown(
         opacity: 0.9 !important;
     }
     </style>
+
+    <div class="top-left-brand">🎬 BOXOFFICEIQ</div>
     """,
     unsafe_allow_html=True
 )
