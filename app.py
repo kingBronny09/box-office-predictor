@@ -18,6 +18,41 @@ st.set_page_config(
     layout="centered"
 )
 
+# Custom CSS: Hide top-right toolbar + Style slider in Dark Royal Magenta (#8B006B)
+st.markdown(
+    """
+    <style>
+    /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
+    [data-testid="stToolbar"],
+    [data-testid="stHeader"],
+    [data-testid="stDecoration"],
+    #MainMenu,
+    footer {
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    /* Slider draggable circle */
+    div[data-baseweb="slider"] div[role="slider"] {
+        background-color: #8B006B !important;
+        border-color: #8B006B !important;
+    }
+
+    /* Slider filled track to the left of the circle */
+    div[data-baseweb="slider"] > div > div > div:nth-child(2) {
+        background-color: #8B006B !important;
+    }
+
+    /* Slider active grade text (e.g., B+) */
+    div[data-testid="stSliderThumbValue"] {
+        color: #8B006B !important;
+        font-weight: 700 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 GRADE_TO_NUM = {
     "F": 0, "D-": 1, "D": 2, "D+": 3,
     "C-": 4, "C": 5, "C+": 6,
