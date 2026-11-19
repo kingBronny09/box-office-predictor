@@ -18,7 +18,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS: Green & Purple Streaks Background + Frosted Card + Royal Magenta Slider
+# Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider
 st.markdown(
     """
     <style>
@@ -32,47 +32,52 @@ st.markdown(
         display: none !important;
     }
 
-    /* Full-screen dark background with diagonal emerald-green & royal-purple streaks */
+    /* Dark background with Emerald-Green streak in Bottom-Left & Royal-Purple in Top-Right */
     [data-testid="stAppViewContainer"] {
         background-color: #090612 !important;
         background-image:
-            radial-gradient(ellipse at 12% 18%, rgba(16, 185, 129, 0.38) 0%, transparent 48%),
-            radial-gradient(ellipse at 88% 22%, rgba(168, 85, 247, 0.42) 0%, transparent 50%),
-            linear-gradient(125deg,
-                rgba(16, 185, 129, 0.22) 0%,
-                rgba(9, 6, 18, 0.92) 32%,
-                rgba(139, 0, 107, 0.32) 55%,
-                rgba(9, 6, 18, 0.92) 74%,
-                rgba(16, 185, 129, 0.28) 100%
+            radial-gradient(ellipse at 10% 88%, rgba(16, 185, 129, 0.45) 0%, transparent 52%),
+            radial-gradient(ellipse at 90% 15%, rgba(168, 85, 247, 0.42) 0%, transparent 52%),
+            linear-gradient(35deg,
+                rgba(16, 185, 129, 0.28) 0%,
+                rgba(9, 6, 18, 0.92) 38%,
+                rgba(9, 6, 18, 0.92) 62%,
+                rgba(139, 0, 107, 0.32) 100%
             ) !important;
         background-attachment: fixed !important;
     }
 
-    /* Frosted-glass dark card with a subtle purple-green glow border */
+    /* Frosted-glass dark card */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background: rgba(14, 11, 24, 0.82) !important;
         backdrop-filter: blur(14px) !important;
         -webkit-backdrop-filter: blur(14px) !important;
-        border: 1px solid rgba(176, 0, 134, 0.45) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
         border-radius: 16px !important;
         box-shadow:
-            -12px 0 35px rgba(16, 185, 129, 0.18),
-            12px 0 35px rgba(168, 85, 247, 0.22) !important;
+            -12px 12px 35px rgba(16, 185, 129, 0.20),
+            12px -12px 35px rgba(168, 85, 247, 0.22) !important;
         padding: 12px !important;
     }
 
-    /* Royal Magenta (#B00086) Slider Thumb & Active Track */
+    /* Pure White Slider Handle (draggable circle) */
     div[data-baseweb="slider"] div[role="slider"] {
-        background-color: #B00086 !important;
-        border-color: #B00086 !important;
+        background-color: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.55) !important;
     }
 
+    /* Pure White Slider Active Track (filled portion) */
     div[data-baseweb="slider"] > div > div > div:nth-child(2) {
-        background-color: #B00086 !important;
+        background-color: #FFFFFF !important;
     }
 
-    div[data-testid="stSliderThumbValue"] {
-        color: #E040FB !important;
+    /* Pure White Selected Grade above thumb & F / A+ endpoint tick labels */
+    div[data-testid="stSliderThumbValue"],
+    div[data-testid="stSliderTickBarMin"],
+    div[data-testid="stSliderTickBarMax"],
+    div[data-baseweb="slider"] * {
+        color: #FFFFFF !important;
         font-weight: 700 !important;
     }
     </style>
