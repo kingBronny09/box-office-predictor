@@ -22,6 +22,11 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Override Streamlit's native red accent variable globally */
+    :root, .stApp, [data-testid="stAppViewContainer"] {
+        --primary-color: #FFFFFF !important;
+    }
+
     /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
     [data-testid="stToolbar"],
     [data-testid="stHeader"],
@@ -60,29 +65,17 @@ st.markdown(
         padding: 12px !important;
     }
 
-    /* Force EVERY layer of the horizontal slider bar itself to solid white */
-    div[data-baseweb="slider"] > div > div,
-    div[data-baseweb="slider"] > div > div > div,
-    div[data-baseweb="slider"] [data-testid="stSliderTrack"] {
+    /* Target BaseWeb's inner slider track bar and thumb directly */
+    [data-testid="stSlider"] [data-baseweb="slider"] > div > div {
         background: #FFFFFF !important;
-        background-color: #FFFFFF !important;
-        background-image: none !important;
-        height: 6px !important;
-        border-radius: 4px !important;
     }
-
-    /* Force the draggable circle (thumb) to pure white */
-    div[data-baseweb="slider"] div[role="slider"] {
-        background: #FFFFFF !important;
+    [data-testid="stSlider"] [role="slider"] {
         background-color: #FFFFFF !important;
-        border: 2px solid #FFFFFF !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.85) !important;
+        border-color: #FFFFFF !important;
     }
-
-    /* Force the active grade (B+) and F / A+ endpoint letters to pure white */
-    div[data-testid="stSliderThumbValue"],
-    div[data-testid="stSliderTickBarMin"],
-    div[data-testid="stSliderTickBarMax"] {
+    [data-testid="stSliderThumbValue"],
+    [data-testid="stSliderTickBarMin"],
+    [data-testid="stSliderTickBarMax"] {
         color: #FFFFFF !important;
         font-weight: 700 !important;
     }
