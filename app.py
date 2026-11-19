@@ -13,7 +13,7 @@ M3_WW = 41.83655214       # Cell H9 (CinemaScore slope)
 B_WW = -501.0544971       # Cell K9 (Worldwide Intercept)
 
 st.set_page_config(
-    page_title="Box Office ROI & Revenue Predictor",
+    page_title="BOXOFFICEIQ",
     page_icon="🎬",
     layout="centered"
 )
