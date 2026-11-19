@@ -188,7 +188,7 @@ with st.container(border=True):
         "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
     )
     st.markdown(
-        "- **Essentially what this means is that our Domestic Box Office Predictor is  ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.** "
+        "**Essentially what this means is that our Domestic Box Office Predictor is  ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.** "
     )
 
     st.divider()
