@@ -18,66 +18,29 @@ st.set_page_config(
     layout="centered"
 )
 
-# Custom CSS: Bottom-Left Green + Top-Right Purple Streaks & Pure White Slider Bar
+# Simple, clean CSS: Green bottom-left & Purple top-right background + Hide toolbar
 st.markdown(
     """
     <style>
-    /* Hide top-right Share, GitHub, 3-dots menu, header, and footer */
-    [data-testid="stToolbar"],
-    [data-testid="stHeader"],
-    [data-testid="stDecoration"],
-    #MainMenu,
-    footer {
-        visibility: hidden !important;
+    /* Hide top-right toolbar & footer */
+    [data-testid="stToolbar"], [data-testid="stHeader"], #MainMenu, footer {
         display: none !important;
     }
 
-    /* Dark background with Emerald-Green streak in Bottom-Left & Royal-Purple in Top-Right */
+    /* Green bottom-left & Purple top-right background streaks */
     [data-testid="stAppViewContainer"] {
-        background-color: #090612 !important;
+        background-color: #090612;
         background-image:
-            radial-gradient(ellipse at 10% 88%, rgba(16, 185, 129, 0.45) 0%, transparent 52%),
-            radial-gradient(ellipse at 90% 15%, rgba(168, 85, 247, 0.42) 0%, transparent 52%),
-            linear-gradient(35deg,
-                rgba(16, 185, 129, 0.28) 0%,
-                rgba(9, 6, 18, 0.92) 38%,
-                rgba(9, 6, 18, 0.92) 62%,
-                rgba(139, 0, 107, 0.32) 100%
-            ) !important;
-        background-attachment: fixed !important;
+            radial-gradient(circle at 10% 90%, rgba(16, 185, 129, 0.45), transparent 45%),
+            radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.45), transparent 45%);
     }
 
-    /* Frosted-glass dark card */
+    /* Frosted dark box */
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        background: rgba(14, 11, 24, 0.82) !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.22) !important;
-        border-radius: 16px !important;
-        box-shadow:
-            -12px 12px 35px rgba(16, 185, 129, 0.20),
-            12px -12px 35px rgba(168, 85, 247, 0.22) !important;
-        padding: 12px !important;
-    }
-
-    /* Override Streamlit's inline red linear-gradient on the slider track bar */
-    div[data-baseweb="slider"] div[style*="linear-gradient"] {
-        background: #FFFFFF !important;
-    }
-
-    /* Make the slider circle handle pure white */
-    div[data-baseweb="slider"] div[role="slider"] {
-        background-color: #FFFFFF !important;
-        border-color: #FFFFFF !important;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
-    }
-
-    /* Make the active grade (B+) and F / A+ labels pure white */
-    div[data-testid="stSliderThumbValue"],
-    div[data-testid="stSliderTickBarMin"],
-    div[data-testid="stSliderTickBarMax"] {
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
+        background: rgba(14, 11, 24, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 12px;
     }
     </style>
     """,
