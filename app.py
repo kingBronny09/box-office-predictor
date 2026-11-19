@@ -246,7 +246,7 @@ with tab3:
     with st.container(border=True):
         st.subheader("🎯 ACCURATELY PREDICTED FILMS")
         st.divider()
-        st.caption("Coming soon — real-world movies where the model's opening-weekend forecast closely matched actual final box office totals.")
+        st.caption("Coming soon — times when the predictor accurately predicted the film's box office numbers.")
 
 # ==========================================================
 # TAB 4: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
