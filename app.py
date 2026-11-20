@@ -271,7 +271,7 @@ with tab2:
 # ==========================================================
 # TAB 3: ACCURATELY PREDICTED FILMS (Placeholder ready for your picks)
 # ==========================================================
-with tab3:
+with tab4:
     with st.container(border=True):
         st.subheader("🎯 ACCURATELY PREDICTED FILMS")
         st.divider()
@@ -280,7 +280,7 @@ with tab3:
 # ==========================================================
 # TAB 4: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
 # ==========================================================
-with tab4:
+with tab5:
     # --- CARD A: TOP 10 HIGHEST-GROSSING FILMS ---
     with st.container(border=True):
         st.subheader("🏆 TOP 10 HIGHEST-GROSSING FILMS OF ALL TIME")
