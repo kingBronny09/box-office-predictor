@@ -205,7 +205,8 @@ with tab1:
                 res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
         else:
             st.caption("Adjust the budget of your desired film, adjust the opening weekend sales, and CinemaScore above, then click **PREDICT**.")
-
+    
+    st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
     with st.container(border=True):
         st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
         st.divider()
