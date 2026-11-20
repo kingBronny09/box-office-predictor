@@ -381,6 +381,43 @@ with tab3:
         else:
             st.caption("Set your film's parameters and number of simulations above, then click **RUN SIMULATION**.")
 
+    st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
+
+    # --- PLAIN-ENGLISH EXPLANATION CARD ---
+    with st.container(border=True):
+        st.subheader("📖 HOW THIS SIMULATION WORKS & HOW TO READ THE GRAPH")
+        st.divider()
+
+        st.markdown("**1. What the Simulation Actually Does**")
+        st.markdown(
+            "Instead of giving you just one single number, a **Monte Carlo simulation** releases your movie thousands of times "
+            "to show all the realistic ways its theatrical run could play out:"
+        )
+        st.markdown(
+            "- **Starts with the Baseline Prediction:** First, it calculates the average expected box office using our regression model.\n"
+            "- **Adds Real-World Unpredictability:** Two movies with the same opening weekend rarely finish with the exact same total—one might catch great word-of-mouth or a holiday boost, while another drops fast against tough competition. Because ~13.5% of Domestic outcomes and ~20.4% of Worldwide outcomes come from real-world surprises outside our model, each simulated run randomly bumps the total up or down along a realistic bell curve.\n"
+            "- **Keeps Results Realistic:** Every simulated run ensures a movie never finishes with less domestic money than its opening weekend, and never finishes with less worldwide money than its domestic total."
+        )
+
+        st.divider()
+
+        st.markdown("**2. What the 4 Numbers Mean**")
+        st.markdown(
+            "- **10th % (Low):** The *bad-luck* scenario—90% of simulated runs do better than this number, and only 10% do worse.\n"
+            "- **Median (50th %):** The middle-of-the-road outcome—half of the simulations finish higher, and half finish lower.\n"
+            "- **90th % (High):** The *best-case breakout* scenario—only the top 10% of simulated runs reach or beat this total.\n"
+            "- **Odds of Profit:** The exact percentage of simulated runs that earned enough worldwide to beat Hollywood's **2.5× Production Budget** break-even rule."
+        )
+
+        st.divider()
+
+        st.markdown("**3. How to Read the Graph**")
+        st.markdown(
+            "- **Left to Right (Horizontal Axis):** Shows possible final worldwide box office totals from lowest on the left to highest on the right.\n"
+            "- **Bar Height (Vertical Axis):** Shows how many simulated runs landed in each dollar range—the tallest bars in the middle are the most likely outcomes.\n"
+            "- **Red Bars vs. Green Bars:** **Red bars** represent runs that finished *below* the 2.5× break-even target (studio loss), while **emerald green bars** represent runs that cleared *above* break-even (profitable). If almost the entire curve is green, the film is a safe bet; if it's split down the middle, it's a toss-up."
+        )
+
 # ==========================================================
 # TAB 4: ACCURATELY PREDICTED FILMS (Placeholder ready for your picks)
 # ==========================================================
