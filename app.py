@@ -314,8 +314,8 @@ with tab3:
             mc_s_lbl.markdown("**Number of Simulated Runs:**")
             num_sims = mc_s_in.select_slider(
                 "Simulated Runs",
-                options=[1000, 2500, 5000, 10000],
-                value=5000,
+                options=[10, 100, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000],
+                value=2000,
                 label_visibility="collapsed"
             )
 
