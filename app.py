@@ -136,7 +136,7 @@ GRADE_TO_NUM = {
 # ==========================================================
 # TOP NAVIGATION TABS
 # ==========================================================
-tab1, tab2, tab3, tab4 = st.tabs(["Home", "Predictor", "Accurately Predicted Films", "Top 10 Hits & Flops"])
+tab1, tab2, tab3, tab4 = st.tabs(["HOME", "PREDICTOR", "ACCURATELY PREDICTED FILMS", "TOP 10"])
 
 # ==========================================================
 # TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
