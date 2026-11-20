@@ -453,4 +453,4 @@ with tab5:
             {"rank": "#10", "title": "Jurassic World (2015)", "worldwide": "\$1.671B", "budget": "\$150M"},
         ]
 
-        h1, h2, h3, h4 = st.columns([0.6, 2.]
+        h1, h2, h3, h4 = st.columns([0.6, 2.])
