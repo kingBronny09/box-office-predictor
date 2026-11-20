@@ -141,7 +141,7 @@ with tab1:
             col1_lbl.markdown("**Production Budget ($M):**")
             budget = col1_in.number_input(
                 "Production Budget ($M)",
-                min_value=1.0, max_value=700.0, value=100.0, step=5.0,
+                min_value=0.2, max_value=700.0, value=100.0, step=5.0,
                 label_visibility="collapsed"
             )
 
@@ -149,7 +149,7 @@ with tab1:
             col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
             opening = col2_in.number_input(
                 "Opening Weekend Gross ($M)",
-                min_value=1.0, max_value=450.0, value=50.0, step=1.0,
+                min_value=0.03, max_value=450.0, value=50.0, step=1.0,
                 label_visibility="collapsed"
             )
 
