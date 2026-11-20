@@ -221,4 +221,4 @@ with tab1:
         st.markdown(
             "- **Domestic Opening Weekend (\$M):** This is easily the strongest predictor of total theatrical momentum.\n"
             "- **Production Budget (\$M):** Captures studio marketing scale and global release footprint.\n"
-            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+\$17.9M** domestically and **+\$41.8M** worldwide
+            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+\$17.9M** domestically and **+\$41.8M** worldwide"
