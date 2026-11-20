@@ -359,22 +359,19 @@ with tab3:
 
             chart_df = pd.DataFrame({
                 "Projected Worldwide Gross ($M)": bin_centers,
-                "Simulated Runs": counts,
-                "Outcome": [
-                    "Profitable (Above 2.5× Break-Even)" if val >= mc_break_even else "Loss (Below 2.5× Break-Even)"
-                    for val in bin_centers
-                ]
+                "Loss (Below 2.5× Break-Even)": [
+                    c if val < mc_break_even else 0 for val, c in zip(bin_centers, counts)
+                ],
+                "Profitable (Above 2.5× Break-Even)": [
+                    c if val >= mc_break_even else 0 for val, c in zip(bin_centers, counts)
+                ],
             })
 
             st.bar_chart(
                 chart_df,
                 x="Projected Worldwide Gross ($M)",
-                y="Simulated Runs",
-                color="Outcome",
-                color_discrete_map={
-                    "Profitable (Above 2.5× Break-Even)": "#10B981",
-                    "Loss (Below 2.5× Break-Even)": "#EF4444"
-                }
+                y=["Loss (Below 2.5× Break-Even)", "Profitable (Above 2.5× Break-Even)"],
+                color=["#EF4444", "#10B981"]
             )
 
             st.caption(
