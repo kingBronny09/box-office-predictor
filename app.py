@@ -133,10 +133,7 @@ GRADE_TO_NUM = {
     "A-": 10, "A": 11, "A+": 12
 }
 
-# ==========================================================
-# TOP NAVIGATION TABS
-# ==========================================================
-tab1, tab2, tab3, tab4 = st.tabs(["HOME", "PREDICTOR", "ACCURATELY PREDICTED FILMS", "TOP 10"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["HOME", "PREDICTOR", "MONTE CARLO", "ACCURATELY PREDICTED FILMS", "TOP 10"])
 
 # ==========================================================
 # TAB 1: HOME (About the Website)
