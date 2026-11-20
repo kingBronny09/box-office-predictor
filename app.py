@@ -1,4 +1,6 @@
 import streamlit as st
+import numpy as np
+import pandas as pd
 
 # Domestic Model (from Row 2: H2:K2)
 M1_DOM = 3.332504304      # Cell J2 (Opening Weekend slope)
@@ -99,7 +101,7 @@ st.markdown(
         padding: 0 !important;
     }
 
-    /* All-White PREDICT button */
+    /* All-White Submit buttons */
     [data-testid="stFormSubmitButton"] button {
         background: #FFFFFF !important;
         background-color: #FFFFFF !important;
@@ -152,13 +154,15 @@ with tab1:
         st.markdown(
             "- **Predict Final Box Office & Studio ROI (`PREDICTOR`):** Plug in any movie's production budget, domestic opening weekend gross, "
             "and opening-night CinemaScore to forecast its final Domestic Gross, Worldwide Gross, and whether it clears Hollywood's 2.5× break-even threshold.\n"
+            "- **Simulate Thousands of Box Office Outcomes (`MONTE CARLO`):** Run up to 10,000 simulated theatrical runs to visualize best-case, "
+            "worst-case, and profit probability distributions.\n"
             "- **Explore Real-World Accuracy (`ACCURATELY PREDICTED FILMS`):** See side-by-side examples of modern theatrical releases where "
             "BOXOFFICEIQ's opening-weekend projections closely matched actual final box office totals.\n"
             "- **Browse All-Time Records (`TOP 10`):** Compare the 10 highest-grossing global blockbusters in cinema history against the 10 biggest studio box office flops."
         )
 
         st.divider()
-        st.caption("Select the **PREDICTOR** tab at the top to test a movie, or explore the historical charts across the navigation bar.")
+        st.caption("Select the **PREDICTOR** or **MONTE CARLO** tab at the top to test a movie, or explore the historical charts across the navigation bar.")
 
 # ==========================================================
 # TAB 2: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
@@ -269,7 +273,119 @@ with tab2:
         )
 
 # ==========================================================
-# TAB 3: ACCURATELY PREDICTED FILMS (Placeholder ready for your picks)
+# TAB 3: MONTE CARLO SIMULATION
+# ==========================================================
+with tab3:
+    with st.container(border=True):
+        st.subheader("🎲 MONTE CARLO BOX OFFICE SIMULATION")
+        st.caption(
+            "Simulates thousands of possible theatrical runs using your regression model's unexplained variance "
+            "(13.5% Domestic / 20.4% Worldwide) to measure downside risk, upside potential, and profit odds."
+        )
+        st.divider()
+
+        with st.form("monte_carlo_form"):
+            mc_b_lbl, mc_b_in = st.columns([1.4, 1], vertical_alignment="center")
+            mc_b_lbl.markdown("**Production Budget ($M):**")
+            mc_budget = mc_b_in.number_input(
+                "MC Production Budget ($M)",
+                min_value=0.2, max_value=700.0, value=100.0, step=5.0,
+                label_visibility="collapsed"
+            )
+
+            mc_o_lbl, mc_o_in = st.columns([1.4, 1], vertical_alignment="center")
+            mc_o_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
+            mc_opening = mc_o_in.number_input(
+                "MC Opening Weekend Gross ($M)",
+                min_value=0.03, max_value=450.0, value=50.0, step=1.0,
+                label_visibility="collapsed"
+            )
+
+            mc_g_lbl, mc_g_in = st.columns([1.4, 1], vertical_alignment="center")
+            mc_g_lbl.markdown("**Audience Score (CinemaScore):**")
+            mc_grade = mc_g_in.select_slider(
+                "MC Audience Score",
+                options=list(GRADE_TO_NUM.keys()),
+                value="C+",
+                label_visibility="collapsed"
+            )
+
+            mc_s_lbl, mc_s_in = st.columns([1.4, 1], vertical_alignment="center")
+            mc_s_lbl.markdown("**Number of Simulated Runs:**")
+            num_sims = mc_s_in.select_slider(
+                "Simulated Runs",
+                options=[1000, 2500, 5000, 10000],
+                value=5000,
+                label_visibility="collapsed"
+            )
+
+            st.write("")
+            mc_submitted = st.form_submit_button("RUN SIMULATION", use_container_width=True)
+
+        if mc_submitted:
+            st.divider()
+
+            mc_score_num = GRADE_TO_NUM[mc_grade]
+
+            base_dom = (M1_DOM * mc_opening) + (M2_DOM * mc_budget) + (M3_DOM * mc_score_num) + B_DOM
+            base_dom = max(mc_opening, base_dom)
+
+            base_ww = (M1_WW * mc_opening) + (M2_WW * mc_budget) + (M3_WW * mc_score_num) + B_WW
+            base_ww = max(base_dom, base_ww)
+
+            mc_break_even = mc_budget * 2.5
+
+            # Simulate Domestic (18% std dev from 13.5% unexplained variance) and Worldwide (24% std dev from 20.4% unexplained variance)
+            rng = np.random.default_rng(seed=42)
+            sim_dom = np.maximum(mc_opening, rng.normal(loc=base_dom, scale=base_dom * 0.18, size=num_sims))
+            sim_ww = np.maximum(sim_dom, rng.normal(loc=base_ww, scale=base_ww * 0.24, size=num_sims))
+
+            p10 = np.percentile(sim_ww, 10)
+            p50 = np.percentile(sim_ww, 50)
+            p90 = np.percentile(sim_ww, 90)
+            prob_profit = np.mean(sim_ww >= mc_break_even) * 100
+
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("10th % (Low)", f"${p10:,.0f}M")
+            m2.metric("Median (50th %)", f"${p50:,.0f}M")
+            m3.metric("90th % (High)", f"${p90:,.0f}M")
+            m4.metric("Odds of Profit", f"{prob_profit:.1f}%")
+
+            st.write("")
+            st.markdown("**Simulated Worldwide Gross Distribution ($M)**")
+
+            counts, bin_edges = np.histogram(sim_ww, bins=30)
+            bin_centers = np.round((bin_edges[:-1] + bin_edges[1:]) / 2, 1)
+
+            chart_df = pd.DataFrame({
+                "Projected Worldwide Gross ($M)": bin_centers,
+                "Simulated Runs": counts,
+                "Outcome": [
+                    "Profitable (Above 2.5× Break-Even)" if val >= mc_break_even else "Loss (Below 2.5× Break-Even)"
+                    for val in bin_centers
+                ]
+            })
+
+            st.bar_chart(
+                chart_df,
+                x="Projected Worldwide Gross ($M)",
+                y="Simulated Runs",
+                color="Outcome",
+                color_discrete_map={
+                    "Profitable (Above 2.5× Break-Even)": "#10B981",
+                    "Loss (Below 2.5× Break-Even)": "#EF4444"
+                }
+            )
+
+            st.caption(
+                f"Break-Even Target (2.5× Budget): **${mc_break_even:,.1f}M** | "
+                f"Expected Domestic Range (10th–90th %): **${np.percentile(sim_dom, 10):,.0f}M – ${np.percentile(sim_dom, 90):,.0f}M**"
+            )
+        else:
+            st.caption("Set your film's parameters and number of simulations above, then click **RUN SIMULATION**.")
+
+# ==========================================================
+# TAB 4: ACCURATELY PREDICTED FILMS (Placeholder ready for your picks)
 # ==========================================================
 with tab4:
     with st.container(border=True):
@@ -278,7 +394,7 @@ with tab4:
         st.caption("Coming soon — times when the predictor accurately predicted the film's box office numbers.")
 
 # ==========================================================
-# TAB 4: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
+# TAB 5: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
 # ==========================================================
 with tab5:
     # --- CARD A: TOP 10 HIGHEST-GROSSING FILMS ---
