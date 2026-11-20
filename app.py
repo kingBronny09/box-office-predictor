@@ -133,7 +133,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accur
 # ==========================================================
 with tab1:
     with st.container(border=True):
-        st.subheader("🎬 Box Office Predictor and ROI Prediction")
+        st.subheader("🎬 BOXOFFICEIQ")
         st.divider()
 
         with st.form("predictor_form"):
@@ -141,7 +141,7 @@ with tab1:
             col1_lbl.markdown("**Production Budget ($M):**")
             budget = col1_in.number_input(
                 "Production Budget ($M)",
-                min_value=0.2, max_value=700.0, value=100.0, step=5.0,
+                min_value=1.0, max_value=500.0, value=120.0, step=5.0,
                 label_visibility="collapsed"
             )
 
@@ -149,7 +149,7 @@ with tab1:
             col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
             opening = col2_in.number_input(
                 "Opening Weekend Gross ($M)",
-                min_value=0.03, max_value=450.0, value=50.0, step=1.0,
+                min_value=0.1, max_value=400.0, value=55.0, step=1.0,
                 label_visibility="collapsed"
             )
 
@@ -158,7 +158,7 @@ with tab1:
             selected_grade = col3_in.select_slider(
                 "Audience Score",
                 options=list(GRADE_TO_NUM.keys()),
-                value="C+",
+                value="B+",
                 label_visibility="collapsed"
             )
 
@@ -194,7 +194,7 @@ with tab1:
             else:
                 res3_val.markdown(f"### :red[{roi_pct:,.1f}% (Below Break-Even)]")
         else:
-            st.caption("Adjust the budget of your desired film, adjust the opening weekend sales, and CinemaScore above, then click **PREDICT**.")
+            st.caption("Adjust the budget, opening weekend, and CinemaScore above, then click **PREDICT**.")
 
 # ==========================================================
 # TAB 2: HOW IT WORKS & MODEL ACCURACY
@@ -246,7 +246,7 @@ with tab3:
     with st.container(border=True):
         st.subheader("🎯 ACCURATELY PREDICTED FILMS")
         st.divider()
-        st.caption("Coming soon — times when the predictor accurately predicted the film's box office numbers.")
+        st.caption("Coming soon — real-world movies where the model's opening-weekend forecast closely matched actual final box office totals.")
 
 # ==========================================================
 # TAB 4: TOP 10 HIGHEST-GROSSING & TOP 10 BIGGEST FLOPS
