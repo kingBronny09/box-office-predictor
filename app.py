@@ -136,12 +136,12 @@ GRADE_TO_NUM = {
 # ==========================================================
 # TOP NAVIGATION TABS
 # ==========================================================
-tab1, tab2, tab3, tab4 = st.tabs(["Predictor", "How It Works & Accuracy", "Accurately Predicted Films", "Top 10 Hits & Flops"])
+tab1, tab2, tab3, tab4 = st.tabs(["Home", "Predictor", "Accurately Predicted Films", "Top 10 Hits & Flops"])
 
 # ==========================================================
 # TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
 # ==========================================================
-with tab1:
+with tab2:
     with st.container(border=True):
         st.subheader("🎬 Box Office Predictor and ROI Prediction")
         st.divider()
@@ -207,49 +207,6 @@ with tab1:
             st.caption("Adjust the budget of your desired film, adjust the opening weekend sales, and CinemaScore above, then click **PREDICT**.")
     
     st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
-    with st.container(border=True):
-        st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
-        st.divider()
-
-        st.markdown("**1. The Model & Training Data**")
-        st.markdown(
-            "This predictor uses **multivariable linear regression** trained on **a large amount modern wide-release movies** "
-            "(spanning from $10M horror hits to $2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
-        )
-        st.markdown(
-            "- **Domestic Opening Weekend ($M):** This is easily the strongest predictor of total theatrical momentum.\n"
-            "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
-            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
-        )
-
-        st.divider()
-
-        st.markdown("**2. Model Accuracy ($R^2$ Fit)**")
-        acc1, acc2 = st.columns(2)
-        acc1.metric(label="Domestic Box Office Accuracy (R²)", value="86.5%")
-        acc2.metric(label="Worldwide Box Office Accuracy (R²)", value="79.6%")
-
-        st.caption(
-            "An R² of 86.5% means these three inputs explain over four-fifths of the variation in final domestic box office totals. "
-            "Worldwide accuracy (79.6%) is slightly lower because certain franchises over-perform internationally relative to their domestic debut."
-        )
-        st.markdown(
-            "**Essentially what this means is that our Domestic Box Office Predictor is ~ 87% accurate and our Worldwide Box Office Predictor is ~ 80% accurate. We are constantly updating our database and adding data to make it as accurate as possible.**"
-        )
-
-        st.divider()
-
-        st.markdown("**3. How Studio ROI is Calculated**")
-        st.markdown(
-            "Movie theaters keep roughly **50% of ticket sales**, and studios spend millions on global marketing on top of production costs. "
-            "Ben Affleck famously said that a film normally must make 4× its budget to break even. This can be true in some cases, but we still follow Hollywood's Break-Even Rule. "
-            "Following Hollywood's standard **2.5× Break-Even Rule**, a film generally needs to earn **2.5 times its production budget** worldwide just to break even before turning a theatrical profit."
-        )
-
-# ==========================================================
-# TAB 2: HOW IT WORKS & MODEL ACCURACY
-# ==========================================================
-with tab2:
     with st.container(border=True):
         st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
         st.divider()
