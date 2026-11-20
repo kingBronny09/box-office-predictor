@@ -279,8 +279,8 @@ with tab3:
     with st.container(border=True):
         st.subheader("🎲 MONTE CARLO BOX OFFICE SIMULATION")
         st.caption(
-            "Simulates thousands of possible theatrical runs using your regression model's unexplained variance "
-            "(13.5% Domestic / 20.4% Worldwide) to measure downside risk, upside potential, and profit odds."
+            "Simulates thousands of possible theatrical runs using our regression model's unexplained variance "
+            "to measure downside risk, upside potential, and profit odds."
         )
         st.divider()
 
