@@ -142,7 +142,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["HOME", "PREDICTOR", "MONTE CARLO", "ACC
 # ==========================================================
 with tab1:
     with st.container(border=True):
-        st.subheader("🎬 ABOUT THE WEBSITE")
+        st.subheader("HOME")
         st.divider()
 
         st.markdown(
@@ -169,7 +169,7 @@ with tab1:
 # ==========================================================
 with tab2:
     with st.container(border=True):
-        st.subheader("🎬 Box Office Predictor and ROI Prediction")
+        st.subheader("PREDICTOR AND ROI PREDICTION")
         st.divider()
 
         with st.form("predictor_form"):
@@ -234,7 +234,7 @@ with tab2:
     
     st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
     with st.container(border=True):
-        st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
+        st.subheader("HOW THIS PREDICTOR WORKS & ACCURACY")
         st.divider()
 
         st.markdown("**1. The Model & Training Data**")
@@ -277,7 +277,7 @@ with tab2:
 # ==========================================================
 with tab3:
     with st.container(border=True):
-        st.subheader("🎲 MONTE CARLO BOX OFFICE SIMULATION")
+        st.subheader("MONTE CARLO SIMULATION")
         st.caption(
             "Simulates thousands of possible theatrical runs using our regression model's unexplained variance "
             "to measure downside risk, upside potential, and profit odds."
@@ -385,7 +385,7 @@ with tab3:
 
     # --- PLAIN-ENGLISH EXPLANATION CARD ---
     with st.container(border=True):
-        st.subheader("📖 HOW THIS SIMULATION WORKS & HOW TO READ THE GRAPH")
+        st.subheader("HOW THIS SIMULATION WORKS & HOW TO READ THE GRAPH")
         st.divider()
 
         st.markdown("**1. What the Simulation Actually Does**")
@@ -423,7 +423,7 @@ with tab3:
 # ==========================================================
 with tab4:
     with st.container(border=True):
-        st.subheader("🎯 ACCURATELY PREDICTED FILMS")
+        st.subheader("ACCURATELY PREDICTED FILMS")
         st.divider()
         st.caption("Coming soon — times when the predictor accurately predicted the film's box office numbers.")
 
