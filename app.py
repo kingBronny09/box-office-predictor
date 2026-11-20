@@ -139,7 +139,32 @@ GRADE_TO_NUM = {
 tab1, tab2, tab3, tab4 = st.tabs(["HOME", "PREDICTOR", "ACCURATELY PREDICTED FILMS", "TOP 10"])
 
 # ==========================================================
-# TAB 1: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
+# TAB 1: HOME (About the Website)
+# ==========================================================
+with tab1:
+    with st.container(border=True):
+        st.subheader("🎬 ABOUT THE WEBSITE")
+        st.divider()
+
+        st.markdown(
+            "**BOXOFFICEIQ** is a data-driven box office forecasting and movie analytics platform built to predict "
+            "a film's final theatrical run and studio profitability right after its opening weekend."
+        )
+
+        st.markdown("**What You Can Do Here:**")
+        st.markdown(
+            "- **Predict Final Box Office & Studio ROI (`PREDICTOR`):** Plug in any movie's production budget, domestic opening weekend gross, "
+            "and opening-night CinemaScore to forecast its final Domestic Gross, Worldwide Gross, and whether it clears Hollywood's 2.5× break-even threshold.\n"
+            "- **Explore Real-World Accuracy (`ACCURATELY PREDICTED FILMS`):** See side-by-side examples of modern theatrical releases where "
+            "BOXOFFICEIQ's opening-weekend projections closely matched actual final box office totals.\n"
+            "- **Browse All-Time Records (`TOP 10`):** Compare the 10 highest-grossing global blockbusters in cinema history against the 10 biggest studio box office flops."
+        )
+
+        st.divider()
+        st.caption("Select the **PREDICTOR** tab at the top to test a movie, or explore the historical charts across the navigation bar.")
+
+# ==========================================================
+# TAB 2: MAIN PREDICTOR (Form-gated so it waits for "PREDICT")
 # ==========================================================
 with tab2:
     with st.container(border=True):
