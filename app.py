@@ -142,7 +142,10 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["HOME", "PREDICTOR", "MONTE CARLO", "ACC
 # ==========================================================
 with tab1:
     with st.container(border=True):
-        st.subheader("HOME")
+        st.markdown(
+            "<h2 style='text-align: center; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 0;'>HOME</h2>",
+            unsafe_allow_html=True
+        )
         st.divider()
 
         st.markdown(
@@ -174,17 +177,17 @@ with tab2:
 
         with st.form("predictor_form"):
             col1_lbl, col1_in = st.columns([1.4, 1], vertical_alignment="center")
-            col1_lbl.markdown("**Production Budget ($M):**")
+            col1_lbl.markdown("**Production Budget (\$M):**")
             budget = col1_in.number_input(
-                "Production Budget ($M)",
+                "Production Budget (\$M)",
                 min_value=0.2, max_value=700.0, value=100.0, step=5.0,
                 label_visibility="collapsed"
             )
 
             col2_lbl, col2_in = st.columns([1.4, 1], vertical_alignment="center")
-            col2_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
+            col2_lbl.markdown("**Domestic Opening Weekend Gross (\$M):**")
             opening = col2_in.number_input(
-                "Opening Weekend Gross ($M)",
+                "Opening Weekend Gross (\$M)",
                 min_value=0.03, max_value=450.0, value=50.0, step=1.0,
                 label_visibility="collapsed"
             )
@@ -217,11 +220,11 @@ with tab2:
 
             res1_lbl, res1_val = st.columns([1.4, 1], vertical_alignment="center")
             res1_lbl.markdown("**PREDICTED TOTAL DOMESTIC GROSS:**")
-            res1_val.markdown(f"### ${pred_dom:,.1f} Million")
+            res1_val.markdown(f"### \${pred_dom:,.1f} Million")
 
             res2_lbl, res2_val = st.columns([1.4, 1], vertical_alignment="center")
             res2_lbl.markdown("**PREDICTED WORLDWIDE GROSS:**")
-            res2_val.markdown(f"### ${pred_ww:,.1f} Million")
+            res2_val.markdown(f"### \${pred_ww:,.1f} Million")
 
             res3_lbl, res3_val = st.columns([1.4, 1], vertical_alignment="center")
             res3_lbl.markdown("**ESTIMATED STUDIO ROI:**")
@@ -240,12 +243,12 @@ with tab2:
         st.markdown("**1. The Model & Training Data**")
         st.markdown(
             "This predictor uses **multivariable linear regression** trained on **a large amount modern wide-release movies** "
-            "(spanning from $10M horror hits to $2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
+            "(spanning from \$10M horror hits to \$2B blockbusters, as well as major box office flops). It weighs three key opening-weekend signals:"
         )
         st.markdown(
-            "- **Domestic Opening Weekend ($M):** This is easily the strongest predictor of total theatrical momentum.\n"
-            "- **Production Budget ($M):** Captures studio marketing scale and global release footprint.\n"
-            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+$17.9M** domestically and **+$41.8M** worldwide."
+            "- **Domestic Opening Weekend (\$M):** This is easily the strongest predictor of total theatrical momentum.\n"
+            "- **Production Budget (\$M):** Captures studio marketing scale and global release footprint.\n"
+            "- **Opening-Night CinemaScore (`F` to `A+`):** It may not seem like a big deal, but a single grade step adds roughly **+\$17.9M** domestically and **+\$41.8M** worldwide."
         )
 
         st.divider()
@@ -286,17 +289,17 @@ with tab3:
 
         with st.form("monte_carlo_form"):
             mc_b_lbl, mc_b_in = st.columns([1.4, 1], vertical_alignment="center")
-            mc_b_lbl.markdown("**Production Budget ($M):**")
+            mc_b_lbl.markdown("**Production Budget (\$M):**")
             mc_budget = mc_b_in.number_input(
-                "MC Production Budget ($M)",
+                "MC Production Budget (\$M)",
                 min_value=0.2, max_value=700.0, value=100.0, step=5.0,
                 label_visibility="collapsed"
             )
 
             mc_o_lbl, mc_o_in = st.columns([1.4, 1], vertical_alignment="center")
-            mc_o_lbl.markdown("**Domestic Opening Weekend Gross ($M):**")
+            mc_o_lbl.markdown("**Domestic Opening Weekend Gross (\$M):**")
             mc_opening = mc_o_in.number_input(
-                "MC Opening Weekend Gross ($M)",
+                "MC Opening Weekend Gross (\$M)",
                 min_value=0.03, max_value=450.0, value=50.0, step=1.0,
                 label_visibility="collapsed"
             )
@@ -346,19 +349,19 @@ with tab3:
             prob_profit = np.mean(sim_ww >= mc_break_even) * 100
 
             m1, m2, m3, m4 = st.columns(4)
-            m1.metric("10th % (Low)", f"${p10:,.0f}M")
-            m2.metric("Median (50th %)", f"${p50:,.0f}M")
-            m3.metric("90th % (High)", f"${p90:,.0f}M")
+            m1.metric("10th % (Low)", f"\${p10:,.0f}M")
+            m2.metric("Median (50th %)", f"\${p50:,.0f}M")
+            m3.metric("90th % (High)", f"\${p90:,.0f}M")
             m4.metric("Odds of Profit", f"{prob_profit:.1f}%")
 
             st.write("")
-            st.markdown("**Simulated Worldwide Gross Distribution ($M)**")
+            st.markdown("**Simulated Worldwide Gross Distribution (\$M)**")
 
             counts, bin_edges = np.histogram(sim_ww, bins=30)
             bin_centers = np.round((bin_edges[:-1] + bin_edges[1:]) / 2, 1)
 
             chart_df = pd.DataFrame({
-                "Projected Worldwide Gross ($M)": bin_centers,
+                "Projected Worldwide Gross (\$M)": bin_centers,
                 "Loss (Below 2.5× Break-Even)": [
                     c if val < mc_break_even else 0 for val, c in zip(bin_centers, counts)
                 ],
@@ -369,14 +372,14 @@ with tab3:
 
             st.bar_chart(
                 chart_df,
-                x="Projected Worldwide Gross ($M)",
+                x="Projected Worldwide Gross (\$M)",
                 y=["Loss (Below 2.5× Break-Even)", "Profitable (Above 2.5× Break-Even)"],
                 color=["#EF4444", "#10B981"]
             )
 
             st.caption(
-                f"Break-Even Target (2.5× Budget): **${mc_break_even:,.1f}M** | "
-                f"Expected Domestic Range (10th–90th %): **${np.percentile(sim_dom, 10):,.0f}M – ${np.percentile(sim_dom, 90):,.0f}M**"
+                f"Break-Even Target (2.5× Budget): **\${mc_break_even:,.1f}M** | "
+                f"Expected Domestic Range (10th–90th %): **${np.percentile(sim_dom, 10):,.0f}M –${np.percentile(sim_dom, 90):,.0f}M**"
             )
         else:
             st.caption("Set your film's parameters and number of simulations above, then click **RUN SIMULATION**.")
@@ -438,66 +441,16 @@ with tab5:
         st.divider()
 
         top_10_movies = [
-            {"rank": "#1", "title": "Avatar (2009)", "worldwide": "$2.923B", "budget": "$237M"},
-            {"rank": "#2", "title": "Avengers: Endgame (2019)", "worldwide": "$2.799B", "budget": "$356M"},
-            {"rank": "#3", "title": "Avatar: The Way of Water (2022)", "worldwide": "$2.320B", "budget": "$350M"},
-            {"rank": "#4", "title": "Titanic (1997)", "worldwide": "$2.264B", "budget": "$200M"},
-            {"rank": "#5", "title": "Ne Zha 2 (2025)", "worldwide": "$2.150B", "budget": "$80M"},
-            {"rank": "#6", "title": "Star Wars: The Force Awakens (2015)", "worldwide": "$2.071B", "budget": "$447M"},
-            {"rank": "#7", "title": "Avengers: Infinity War (2018)", "worldwide": "$2.052B", "budget": "$325M"},
-            {"rank": "#8", "title": "Spider-Man: No Way Home (2021)", "worldwide": "$1.922B", "budget": "$200M"},
-            {"rank": "#9", "title": "Inside Out 2 (2024)", "worldwide": "$1.699B", "budget": "$200M"},
-            {"rank": "#10", "title": "Jurassic World (2015)", "worldwide": "$1.671B", "budget": "$150M"},
+            {"rank": "#1", "title": "Avatar (2009)", "worldwide": "\$2.923B", "budget": "\$237M"},
+            {"rank": "#2", "title": "Avengers: Endgame (2019)", "worldwide": "\$2.799B", "budget": "\$356M"},
+            {"rank": "#3", "title": "Avatar: The Way of Water (2022)", "worldwide": "\$2.320B", "budget": "\$350M"},
+            {"rank": "#4", "title": "Titanic (1997)", "worldwide": "\$2.264B", "budget": "\$200M"},
+            {"rank": "#5", "title": "Ne Zha 2 (2025)", "worldwide": "\$2.150B", "budget": "\$80M"},
+            {"rank": "#6", "title": "Star Wars: The Force Awakens (2015)", "worldwide": "\$2.071B", "budget": "\$447M"},
+            {"rank": "#7", "title": "Avengers: Infinity War (2018)", "worldwide": "\$2.052B", "budget": "\$325M"},
+            {"rank": "#8", "title": "Spider-Man: No Way Home (2021)", "worldwide": "\$1.922B", "budget": "\$200M"},
+            {"rank": "#9", "title": "Inside Out 2 (2024)", "worldwide": "\$1.699B", "budget": "\$200M"},
+            {"rank": "#10", "title": "Jurassic World (2015)", "worldwide": "\$1.671B", "budget": "\$150M"},
         ]
 
-        h1, h2, h3, h4 = st.columns([0.6, 2.6, 1.2, 1.0])
-        h1.markdown("**Rank**")
-        h2.markdown("**Film**")
-        h3.markdown("**Worldwide**")
-        h4.markdown("**Budget**")
-        st.divider()
-
-        for movie in top_10_movies:
-            c1, c2, c3, c4 = st.columns([0.6, 2.6, 1.2, 1.0], vertical_alignment="center")
-            c1.markdown(f"**{movie['rank']}**")
-            c2.markdown(f"**{movie['title']}**")
-            c3.markdown(f":green[**{movie['worldwide']}**]")
-            c4.markdown(f"{movie['budget']}")
-
-    st.markdown("<div style='height: 96px;'></div>", unsafe_allow_html=True)
-    st.markdown("When talking about the Top 10 Highest Grossing, it's hard not to mention the stinkers. Here are the...")
-
-    # --- CARD B: TOP 10 BIGGEST WORLDWIDE BOX OFFICE FLOPS ---
-    with st.container(border=True):
-        st.subheader("📉 TOP 10 BIGGEST WORLDWIDE BOX OFFICE FLOPS")
-        st.caption("Ranked by estimated unadjusted studio net loss (accounting for production budget, marketing, and theater cuts).")
-        st.divider()
-
-        top_10_flops = [
-            {"rank": "#1", "title": "The Marvels (2023)", "worldwide": "$206.1M", "budget": "$270M", "loss": "-$237M"},
-            {"rank": "#2", "title": "John Carter (2012)", "worldwide": "$284.1M", "budget": "$264M", "loss": "-$200M"},
-            {"rank": "#3", "title": "Strange World (2022)", "worldwide": "$73.6M", "budget": "$180M", "loss": "-$197M"},
-            {"rank": "#4", "title": "The Lone Ranger (2013)", "worldwide": "$260.5M", "budget": "$225M", "loss": "-$190M"},
-            {"rank": "#5", "title": "Mortal Engines (2018)", "worldwide": "$83.7M", "budget": "$110M", "loss": "-$175M"},
-            {"rank": "#6", "title": "The Flash (2023)", "worldwide": "$271.3M", "budget": "$200M", "loss": "-$155M"},
-            {"rank": "#7", "title": "King Arthur: Legend of the Sword (2017)", "worldwide": "$148.7M", "budget": "$175M", "loss": "-$153M"},
-            {"rank": "#8", "title": "Jungle Cruise (2021)", "worldwide": "$220.9M", "budget": "$200M", "loss": "-$150M"},
-            {"rank": "#9", "title": "Joker: Folie à Deux (2024)", "worldwide": "$206.4M", "budget": "$190M", "loss": "-$144M"},
-            {"rank": "#10", "title": "Mars Needs Moms (2011)", "worldwide": "$39.0M", "budget": "$150M", "loss": "-$144M"},
-        ]
-
-        fh1, fh2, fh3, fh4, fh5 = st.columns([0.55, 2.35, 1.0, 0.9, 1.0])
-        fh1.markdown("**Rank**")
-        fh2.markdown("**Film**")
-        fh3.markdown("**Worldwide**")
-        fh4.markdown("**Budget**")
-        fh5.markdown("**Est. Loss**")
-        st.divider()
-
-        for flop in top_10_flops:
-            fc1, fc2, fc3, fc4, fc5 = st.columns([0.55, 2.35, 1.0, 0.9, 1.0], vertical_alignment="center")
-            fc1.markdown(f"**{flop['rank']}**")
-            fc2.markdown(f"**{flop['title']}**")
-            fc3.markdown(f"{flop['worldwide']}")
-            fc4.markdown(f"{flop['budget']}")
-            fc5.markdown(f":red[**{flop['loss']}**]")
+        h1, h2, h3, h4 = st.columns([0.6, 2.
