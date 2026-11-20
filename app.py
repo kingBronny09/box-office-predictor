@@ -206,7 +206,7 @@ with tab1:
         else:
             st.caption("Adjust the budget of your desired film, adjust the opening weekend sales, and CinemaScore above, then click **PREDICT**.")
 
-        with st.container(border=True):
+    with st.container(border=True):
         st.subheader("📊 HOW THIS PREDICTOR WORKS & ACCURACY")
         st.divider()
 
